@@ -1,5 +1,8 @@
 # repro-screenshot-chrome-crash
 
+[ Update: this repo is not needed anymore because I found the flag that removed this crash:  `--disable-dev-shm-usage`.
+  See https://bugs.chromium.org/p/chromium/issues/detail?id=736452 for an explanation ]
+
 Reproduce a bug in Chrome that crashes the browser when taking a screenshot
 
 ## To reproduce
