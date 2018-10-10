@@ -8,8 +8,9 @@ async function main() {
   const BROWSER_WIDTH = 2500
   const BROWSER_HEIGHT = 700
   const PAGE_HEIGHT = 9891
-  const SECTION_HEIGHT = 1000
   const SLEEP_BETWEEN_SECTION_SCREENSHOTS = 0
+  const FULL_PAGE = true
+  const SECTION_HEIGHT = 1000
 
   console.log('connecting...')
   // const browser = await puppeteer.launch({headless: true})
@@ -20,6 +21,13 @@ async function main() {
 
   console.log('navigating to page...')
   await page.goto('https://www.amazon.com/All-new-Echo-Dot-3rd-Gen/dp/B0792R1RSN/ref=redir_mobile_desktop')
+
+  if (FULL_PAGE) {
+    console.log('taking full page screenshot...')
+    await page.screenshot({path: 'screenshots/screenshot.png', fullPage: true})
+    console.log('succeeded!')
+    return
+  }
 
   const numberOfSections = Math.ceil(PAGE_HEIGHT / SECTION_HEIGHT)
   for (let i = 0; i < numberOfSections; ++i) {
