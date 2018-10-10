@@ -1,0 +1,27 @@
+{
+  "name": "repro-screenshot-chrome-crash",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Reproduce a bug in Chrome that crashes the browser when taking a screenshot",
+  "main": "index.js",
+  "scripts": {
+    "build": "npm run build:docker",
+    "build:docker": "docker build -t repro-screenshot-chrome-crash .",
+    "start": "docker rm -fv repro-screenshot-chrome-crash; docker run --name repro-screenshot-chrome-crash -d -p 9222:9222 --cap-add SYS_ADMIN repro-screenshot-chrome-crash && node index.js ; docker logs repro-screenshot-chrome-crash"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/giltayar/repro-screenshot-chrome-crash.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/giltayar/repro-screenshot-chrome-crash/issues"
+  },
+  "homepage": "https://github.com/giltayar/repro-screenshot-chrome-crash#readme",
+  "dependencies": {
+    "node-fetch": "^2.2.0",
+    "puppeteer": "^1.9.0"
+  }
+}
