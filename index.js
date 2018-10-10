@@ -1,6 +1,6 @@
 'use strict'
 const {promisify} = require('util')
-const puppeteer = require('puppeteer')
+const puppeteer = require('puppeteer-core')
 const fetch = require('node-fetch')
 
 async function main() {
@@ -35,7 +35,7 @@ async function main() {
   }
 }
 
-main().then(_ => process.exit(0)).catch(console.error)
+main().catch(console.error).then(_ => process.exit(0))
 
 async function getBrowserWSEndpointId() {
   const response = await fetch('http://0.0.0.0:9222/json/version')
