@@ -10,7 +10,7 @@ async function main() {
   const PAGE_HEIGHT = 9891
   const SLEEP_BETWEEN_SECTION_SCREENSHOTS = 0
   const SECTION_HEIGHT = 1000
-  const FULL_PAGE = true
+  const FULL_PAGE = false
 
   console.log('connecting...')
   // const browser = await puppeteer.launch({headless: true})

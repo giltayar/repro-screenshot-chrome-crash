@@ -31,6 +31,8 @@ USER headless
 
 ENTRYPOINT ["/usr/bin/google-chrome-stable", \
 \
+            # "--headless", \
+            "--disable-dev-shm-usage", \
             "--disable-background-networking", \
             "--disable-background-timer-throttling", \
             "--disable-client-side-phishing-detection", \
