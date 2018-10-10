@@ -7,7 +7,7 @@
   "scripts": {
     "build": "npm run build:docker",
     "build:docker": "docker build -t repro-screenshot-chrome-crash .",
-    "start": "docker rm -fv repro-screenshot-chrome-crash; docker run --name repro-screenshot-chrome-crash -d -p 9222:9222 --cap-add SYS_ADMIN repro-screenshot-chrome-crash && node index.js ; docker logs repro-screenshot-chrome-crash"
+    "start": "docker rm -fv repro-screenshot-chrome-crash; docker run --name repro-screenshot-chrome-crash -d -p 9222:9222 --cap-add SYS_ADMIN repro-screenshot-chrome-crash && node index.js || docker logs repro-screenshot-chrome-crash"
   },
   "repository": {
     "type": "git",
@@ -22,6 +22,7 @@
   "homepage": "https://github.com/giltayar/repro-screenshot-chrome-crash#readme",
   "dependencies": {
     "node-fetch": "^2.2.0",
+    "p-retry": "^2.0.0",
     "puppeteer-core": "^1.9.0"
   }
 }
