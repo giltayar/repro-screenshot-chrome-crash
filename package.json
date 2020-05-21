@@ -22,8 +22,8 @@
   },
   "homepage": "https://github.com/giltayar/repro-screenshot-chrome-crash#readme",
   "dependencies": {
-    "node-fetch": "^2.2.0",
-    "p-retry": "^2.0.0",
-    "puppeteer-core": "^1.9.0"
+    "node-fetch": "^2.6.0",
+    "p-retry": "^4.2.0",
+    "puppeteer-core": "^3.1.0"
   }
 }

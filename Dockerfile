@@ -29,10 +29,12 @@ EXPOSE 9222
 
 USER headless
 
+RUN echo "Version of Chrome is:" `/usr/bin/google-chrome-stable --version`
+
+
 ENTRYPOINT ["/usr/bin/google-chrome-stable", \
 \
-            # "--headless", \
-            "--disable-dev-shm-usage", \
+            "--headless", \
             "--disable-background-networking", \
             "--disable-background-timer-throttling", \
             "--disable-client-side-phishing-detection", \
@@ -54,6 +56,9 @@ ENTRYPOINT ["/usr/bin/google-chrome-stable", \
             "--headless", \
             "--hide-scrollbars", \
             "--mute-audio", \
+            "--no-sandbox", \
+            # See https://bugs.chromium.org/p/chromium/issues/detail?id=736452 for an explanation of `disable-dev-shm-usage`
+            "--disable-dev-shm-usage", \
 \
             "--window-size=1024,768", \
 \
