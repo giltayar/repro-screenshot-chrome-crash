@@ -31,26 +31,27 @@ async function main() {
 
   const numberOfSections = Math.ceil(PAGE_HEIGHT / BROWSER_HEIGHT)
 
-  for (let i = 0; i < numberOfSections; ++i) {
-    page.evaluate((i, h) => document.querySelector('html').style.transform = `translate(0px, ${-h * i}px)`, i, BROWSER_HEIGHT)
-    const clip = {
-      x: 0,
-      y: 0,
-      width: BROWSER_WIDTH,
-      height: BROWSER_HEIGHT
+  for (const j of [1, 2, 3, 4])
+    for (let i = 0; i < numberOfSections; ++i) {
+      page.evaluate((i, h) => document.querySelector('html').style.transform = `translate(0px, ${-h * i}px)`, i, BROWSER_HEIGHT)
+      const clip = {
+        x: 0,
+        y: 0,
+        width: BROWSER_WIDTH,
+        height: BROWSER_HEIGHT
+      }
+      console.log(`taking screenshot #${i + 1}...`, clip)
+
+      const buffer = await page.screenshot({
+        path: `screenshots/screenshot-${i + 1}.png`,
+        clip
+      })
+
+      await fs.promises.writeFile(`${__dirname}/screenshots/screenshot-${i + 1}.png`, buffer)
+
+      console.log('took screenshot')
+      if (SLEEP_BETWEEN_SECTION_SCREENSHOTS) await promisify(setTimeout)(SLEEP_BETWEEN_SECTION_SCREENSHOTS)
     }
-    console.log(`taking screenshot #${i + 1}...`, clip)
-
-    const buffer = await page.screenshot({
-      path: `screenshots/screenshot-${i + 1}.png`,
-      clip
-    })
-
-    await fs.promises.writeFile(`${__dirname}/screenshots/screenshot-${i + 1}.png`, buffer)
-
-    console.log('took screenshot')
-    if (SLEEP_BETWEEN_SECTION_SCREENSHOTS) await promisify(setTimeout)(SLEEP_BETWEEN_SECTION_SCREENSHOTS)
-  }
   console.log('succeeded!')
 }
 
