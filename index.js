@@ -46,7 +46,7 @@ async function main() {
 
     let i = 0
     for (const clipRegion of clipRegions) {
-      page.evaluate(({x, y}) => document.querySelector('html').style.transform = `translate(-${x}px, -${y}px)`, clipRegion)
+      await page.evaluate(({x, y}) => document.querySelector('html').style.transform = `translate(-${x}px, -${y}px)`, clipRegion)
 
       console.log(`taking screenshot #${i + 1}...`, clipRegion)
       const buffer = await page.screenshot({
