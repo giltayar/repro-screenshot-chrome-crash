@@ -51,7 +51,7 @@ async function main() {
       console.log(`taking screenshot #${i + 1}...`, clipRegion)
       const buffer = await page.screenshot({
         path: `screenshots/screenshot-${i + 1}.png`,
-        clip: clipRegion
+        clip: {...clipRegion, x: 0, y: 0}
       })
       console.log('took screenshot')
 
