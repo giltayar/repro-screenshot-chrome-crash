@@ -7,8 +7,7 @@
   "scripts": {
     "build": "npm run build:docker",
     "build:docker": "docker build -t repro-screenshot-chrome-crash .",
-    "start": "docker rm -fv repro-screenshot-chrome-crash; docker run --name repro-screenshot-chrome-crash -d -p 9222:9222 --cap-add SYS_ADMIN repro-screenshot-chrome-crash && node index.js || docker logs repro-screenshot-chrome-crash",
-    "start:yuki": "docker rm -fv repro-screenshot-chrome-crash; docker run --name repro-screenshot-chrome-crash -d -p 9222:9222 --cap-add SYS_ADMIN yukinying/chrome-headless-browser:69.0.3497.23 && node index.js || docker logs repro-screenshot-chrome-crash"
+    "start": "docker rm -fv repro-screenshot-chrome-crash; docker run --name repro-screenshot-chrome-crash -d -p 9222:9222 --cap-add SYS_ADMIN repro-screenshot-chrome-crash && node index.js || docker logs repro-screenshot-chrome-crash"
   },
   "repository": {
     "type": "git",
@@ -24,6 +23,11 @@
   "dependencies": {
     "node-fetch": "^2.6.0",
     "p-retry": "^4.2.0",
-    "puppeteer-core": "^3.1.0"
+    "puppeteer-core": "^3.1.0",
+    "serve-handler": "^6.1.2"
+  },
+  "devDependencies": {
+    "@types/node": "^14.0.5",
+    "@types/node-fetch": "^2.5.7"
   }
 }

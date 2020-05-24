@@ -1,0 +1,48 @@
+/* latin-ext */
+@font-face {
+  font-family: 'Lato';
+  font-style: italic;
+  font-weight: 400;
+  src: local('Lato Italic'), local('Lato-Italic'), url(sha256-c674eff3743eee0dd63c18dd9d1fd83710b01b9e4105d1e4b5f78a27d9cc187c?rg_namespace-override=0seSQU0-RUqm2KPpJB-kvw%7E%7E&rg_map-raw=https%3A%2F%2Ffonts.gstatic.com%2Fs%2Flato%2Fv16%2FS6u8w4BMUTPHjxsAUi-qNiXg7eU0.woff2) format('woff2');
+  unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Lato';
+  font-style: italic;
+  font-weight: 400;
+  src: local('Lato Italic'), local('Lato-Italic'), url(sha256-fe4bbdad1d6dff75cde79f8afc07f29502bd4708cb0ce5f552083c3d81ba8382?rg_namespace-override=0seSQU0-RUqm2KPpJB-kvw%7E%7E&rg_map-raw=https%3A%2F%2Ffonts.gstatic.com%2Fs%2Flato%2Fv16%2FS6u8w4BMUTPHjxsAXC-qNiXg7Q.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Lato';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Lato Regular'), local('Lato-Regular'), url(sha256-3dec2ba3a35b2d878329a4687f5061f4a62030ad69bd0ebb2ca61c4fda102f38?rg_namespace-override=0seSQU0-RUqm2KPpJB-kvw%7E%7E&rg_map-raw=https%3A%2F%2Ffonts.gstatic.com%2Fs%2Flato%2Fv16%2FS6uyw4BMUTPHjxAwXiWtFCfQ7A.woff2) format('woff2');
+  unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Lato';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Lato Regular'), local('Lato-Regular'), url(sha256-036d841b132c14046e26d8f2da1bc634c6ad34885ed1295660694a91c98933a6?rg_namespace-override=0seSQU0-RUqm2KPpJB-kvw%7E%7E&rg_map-raw=https%3A%2F%2Ffonts.gstatic.com%2Fs%2Flato%2Fv16%2FS6uyw4BMUTPHjx4wXiWtFCc.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Lato';
+  font-style: normal;
+  font-weight: 700;
+  src: local('Lato Bold'), local('Lato-Bold'), url(sha256-9777cdc714f5f41e30b3ce3bef443895e7e454bc304e32bb97d20c4e3d78032e?rg_namespace-override=0seSQU0-RUqm2KPpJB-kvw%7E%7E&rg_map-raw=https%3A%2F%2Ffonts.gstatic.com%2Fs%2Flato%2Fv16%2FS6u9w4BMUTPHh6UVSwaPGQ3q5d0N7w.woff2) format('woff2');
+  unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Lato';
+  font-style: normal;
+  font-weight: 700;
+  src: local('Lato Bold'), local('Lato-Bold'), url(sha256-9baad10e85c5be8d5697086479983b6b477197103bf8f0f11817b1bdfb9a7451?rg_namespace-override=0seSQU0-RUqm2KPpJB-kvw%7E%7E&rg_map-raw=https%3A%2F%2Ffonts.gstatic.com%2Fs%2Flato%2Fv16%2FS6u9w4BMUTPHh6UVSwiPGQ3q5d0.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}

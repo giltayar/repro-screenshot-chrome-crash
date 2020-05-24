@@ -1,16 +1,38 @@
 'use strict'
 const {promisify} = require('util')
 const fs = require('fs')
+const http = require('http');
+const serverHandler = require('serve-handler');
 const puppeteer = require('puppeteer-core')
 const fetch = require('node-fetch')
 const retry = require('p-retry')
 
 async function main() {
-  const BROWSER_WIDTH = 1024
+  const clipRegions = [
+    { x: 0, y: 0, width: 1366, height: 768 },
+    { x: 1366, y: 0, width: 12, height: 768 },
+    { x: 0, y: 768, width: 1366, height: 768 },
+    { x: 1366, y: 768, width: 12, height: 768 },
+    { x: 0, y: 1536, width: 1366, height: 768 },
+    { x: 1366, y: 1536, width: 12, height: 768 },
+    { x: 0, y: 2304, width: 1366, height: 768 },
+    { x: 1366, y: 2304, width: 12, height: 768 },
+    { x: 0, y: 3072, width: 1366, height: 768 },
+    { x: 1366, y: 3072, width: 12, height: 768 },
+    { x: 0, y: 3840, width: 1366, height: 768 },
+    { x: 1366, y: 3840, width: 12, height: 768 },
+    { x: 0, y: 4608, width: 1366, height: 768 },
+    { x: 1366, y: 4608, width: 12, height: 768 },
+    { x: 0, y: 5376, width: 1366, height: 768 },
+    { x: 1366, y: 5376, width: 12, height: 768 },
+    { x: 0, y: 6144, width: 1366, height: 659 },
+    { x: 1366, y: 6144, width: 12, height: 659 }
+  ]
+  const BROWSER_WIDTH = 1366
   const BROWSER_HEIGHT = 768
-  const PAGE_HEIGHT = 12000
   const SLEEP_BETWEEN_SECTION_SCREENSHOTS = 0
-  const FULL_PAGE = false
+
+  await runServer(__dirname + '/page-that-crashes')
 
   console.log('connecting...')
   // const browser = await puppeteer.launch({headless: true})
@@ -20,49 +42,43 @@ async function main() {
   await page.setViewport({width: BROWSER_WIDTH, height: BROWSER_HEIGHT})
 
   console.log('navigating to page...')
-  await page.goto('https://render-wus.applitools.com/renderid/e5e3d542-7685-49ca-8f10-b4e4ba47ca63?rg_auth-token=eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI0SnlGZmMwaFRVX2pzZTVCNlFTX2lnfn4iLCJpYXQiOjE1OTAwNDU4NjQsImV4cCI6MTU5MDA2NzQ2NCwiaXNzIjoiZXllc2FwaS5hcHBsaXRvb2xzLmNvbSxleWVzcHVibGljd3VzaTAuYmxvYi5jb3JlLndpbmRvd3MubmV0IiwidmdzZXJ2aWNldXJsIjoiaHR0cHM6Ly9yZW5kZXItd3VzLmFwcGxpdG9vbHMuY29tIn0.km2w_NENpBpCXSnE_jAKxEyz5PHXMho25pusbxHpGOVlf3hqyYxgq_uJSjBcoDXT7AapHtbGF8sP3djRl1x0M-9x_-50RtXsq1uWoySw68-kfhY7EHfTS6mRPIj5NudTUOHmHg2Rl81fwQB4DoyJc98f1QaPCeFLzeNZCAUcKaI&rg_urlmode=rewrite&rg_namespace-override=0seSQU0-RUqm2KPpJB-kvw~~')
+  await page.goto('http://host.docker.internal:3000/page-that-crashes.html')
 
-  if (FULL_PAGE) {
-    console.log('taking full page screenshot...')
-    await page.screenshot({path: 'screenshots/screenshot.png', fullPage: true})
-    console.log('succeeded!')
-    return
-  }
+    let i = 0
+    for (const clipRegion of clipRegions) {
+      page.evaluate(({x, y}) => document.querySelector('html').style.transform = `translate(-${x}px, -${y}px)`, clipRegion)
 
-  const numberOfSections = Math.ceil(PAGE_HEIGHT / BROWSER_HEIGHT)
-
-  for (const j of [1, 2, 3, 4])
-    for (let i = 0; i < numberOfSections; ++i) {
-      page.evaluate((i, h) => document.querySelector('html').style.transform = `translate(0px, ${-h * i}px)`, i, BROWSER_HEIGHT)
-      const clip = {
-        x: 0,
-        y: 0,
-        width: BROWSER_WIDTH,
-        height: BROWSER_HEIGHT
-      }
-      console.log(`taking screenshot #${i + 1}...`, clip)
-
+      console.log(`taking screenshot #${i + 1}...`, clipRegion)
       const buffer = await page.screenshot({
         path: `screenshots/screenshot-${i + 1}.png`,
-        clip
+        clip: clipRegion
       })
+      console.log('took screenshot')
 
       await fs.promises.writeFile(`${__dirname}/screenshots/screenshot-${i + 1}.png`, buffer)
 
-      console.log('took screenshot')
       if (SLEEP_BETWEEN_SECTION_SCREENSHOTS) await promisify(setTimeout)(SLEEP_BETWEEN_SECTION_SCREENSHOTS)
+      ++i
     }
   console.log('succeeded!')
 }
 
 process.on('unhandledRejection', err => {console.error(err); process.exit(1)})
-
 main().catch(err => {console.error(err); process.exit(1)}).then(_ => process.exit(0))
 
 async function getBrowserWSEndpointId() {
+  //@ts-ignore
   const response = await fetch('http://0.0.0.0:9222/json/version')
 
   const jsonResponse = await response.json()
 
   return jsonResponse.webSocketDebuggerUrl
+}
+
+async function runServer(dir) {
+  const server = http.createServer((request, response) => {
+    return serverHandler(request, response, {public: dir});
+  })
+
+  await new Promise(r => server.listen(3000, r));
 }
